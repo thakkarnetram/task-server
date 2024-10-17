@@ -15,6 +15,6 @@ const actionRouter = require("./routers/action-router");
 app.use("/", statusRouter);
 app.use("/", authrouter);
 app.use("/", actionRouter);
-app.listen(8082, () => {
+app.listen(8000, () => {
   console.log("Connected");
 });
