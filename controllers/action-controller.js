@@ -1,6 +1,9 @@
 const OtpModel = require("../model/otp-model");
 const emailSender = require("../utils/email-sender");
 
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+
 function generateOtp() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
@@ -10,6 +13,9 @@ exports.createAndSendOtp = async (req, res) => {
   const otp = generateOtp();
   if (!email) {
     return res.status(400).json({ message: "Email cant be empty" });
+  }
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ message: "Invalid email format" });
   }
   const otpRecord = new OtpModel({
     otp: otp,
