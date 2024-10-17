@@ -9,12 +9,12 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.set("views", path.join(__dirname, "src", "views"));
 app.set("view engine", "ejs");
 app.use(cors());
+const statusRouter = require("./routers/status-router");
 const authrouter = require("./routers/auth-router");
 const actionRouter = require("./routers/action-router");
-const { log } = require("console");
+app.use("/", statusRouter);
 app.use("/", authrouter);
 app.use("/", actionRouter);
-
 app.listen(8082, () => {
   console.log("Connected");
 });
